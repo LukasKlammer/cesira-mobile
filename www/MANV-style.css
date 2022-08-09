@@ -1,0 +1,182 @@
+h1 {
+    text-align: center;
+}
+
+body {
+    margin: 0;
+    background-color: rgb(228, 220, 220);
+    font-family: 'Source Sans Pro', sans-serif;
+}
+
+button:hover, input:hover, label:hover {
+    cursor: pointer;
+}
+
+.container-patient-survey {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: rgb(179, 179, 179);
+    padding-top: 8px;
+    padding-bottom: 8px;
+}
+
+.ongoing-number {
+    font-size: 32px;
+    background-color: antiquewhite;
+    padding: 20px;
+    font-family: 'Source Sans Pro', sans-serif;
+}
+
+.patient-data {
+    margin: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+
+.CESIRA-check {
+    display: flex;
+    flex-direction: row;
+    font-size: larger;
+    padding: 0 32px 0 32px;
+}
+
+.add-button {
+    font-size: 16px;
+    font-weight: bold;
+    padding: 16px;
+    margin: 8px;
+    background: #eb7575;
+    border-radius: 12px;
+}
+
+input {
+    font-size: larger;
+    text-align: center;
+}
+
+.container-count-patients {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.CESIRA-sum-total {
+    margin-bottom: 20px;
+    font-size: x-large;
+    text-align: center;
+}
+
+.bg-grey {
+    background-color: grey;
+}
+
+.bg-red {
+    background-color: red;
+}
+
+.bg-yellow {
+    background-color: yellow;
+}
+
+.bg-green {
+    background-color: green;
+}
+
+.bg-black {
+    background-color: black;
+    color: white;
+}
+
+.bg-white {
+    background-color: white;
+}
+
+th {
+    padding: 4px;
+}
+
+td {
+    padding: 4px;
+}
+
+.container-patient-list {
+    background-color: rgb(179, 179, 179);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.patient-list {
+    font-size: 20px;
+}
+
+li {
+    padding: 8px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border: 1px solid black;
+}
+
+.d-none {
+    display: none !important;
+}
+
+.overlay {
+    position: fixed;
+    z-index: 999;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background-color: rgba(0, 0, 0, 0.7);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+}
+
+.info-triage-color {
+    font-size: 42px;
+    font-weight: bolder;
+    padding: 100px;
+    margin: 16px;
+    border-radius: 4px;
+}
+
+
+
+.next-triage-button {
+    font-size: 32px;
+    font-weight: bold;
+    padding: 64px;
+    margin: 16px;
+    background: rgb(255, 255, 255);
+    border-radius: 12px;
+}
+
+
+
+@media (max-width: 1024px) {
+    .container-patient-survey {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        padding-top: 0px;
+        padding-bottom: 0px;
+    }
+
+    .patient-data {
+        margin: 0;
+    }
+
+    h3 {
+        margin: 10px 0px 5px 0px;
+    }
+}

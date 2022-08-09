@@ -1,50 +1,121 @@
 <!DOCTYPE html>
-<!--
-    Licensed to the Apache Software Foundation (ASF) under one
-    or more contributor license agreements.  See the NOTICE file
-    distributed with this work for additional information
-    regarding copyright ownership.  The ASF licenses this file
-    to you under the Apache License, Version 2.0 (the
-    "License"); you may not use this file except in compliance
-    with the License.  You may obtain a copy of the License at
+<html lang="en">
 
-    http://www.apache.org/licenses/LICENSE-2.0
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MANV-Sichtung-CESIRA</title>
 
-    Unless required by applicable law or agreed to in writing,
-    software distributed under the License is distributed on an
-    "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
-     KIND, either express or implied.  See the License for the
-    specific language governing permissions and limitations
-    under the License.
--->
-<html>
-    <head>
-        <meta charset="utf-8">
-        <!--
-        Customize this policy to fit your own app's needs. For more guidance, please refer to the docs:
-            https://cordova.apache.org/docs/en/latest/
-        Some notes:
-            * https://ssl.gstatic.com is required only on Android and is needed for TalkBack to function properly
-            * Disables use of inline scripts in order to mitigate risk of XSS vulnerabilities. To change this:
-                * Enable inline JS: add 'unsafe-inline' to default-src
-        -->
-        <meta http-equiv="Content-Security-Policy" content="default-src 'self' data: https://ssl.gstatic.com 'unsafe-eval'; style-src 'self' 'unsafe-inline'; media-src *; img-src 'self' data: content:;">
-        <meta name="format-detection" content="telephone=no">
-        <meta name="msapplication-tap-highlight" content="no">
-        <meta name="viewport" content="initial-scale=1, width=device-width, viewport-fit=cover">
-        <meta name="color-scheme" content="light dark">
-        <link rel="stylesheet" href="css/index.css">
-        <title>Hello World</title>
-    </head>
-    <body>
-        <div class="app">
-            <h1>Apache Cordova</h1>
-            <div id="deviceready" class="blink">
-                <p class="event listening">Connecting to Device</p>
-                <p class="event received">Device is Ready</p>
-            </div>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Source+Sans+Pro:ital,wght@0,200;0,300;0,400;0,600;0,700;0,900;1,200;1,300;1,400;1,600;1,700;1,900&display=swap"
+        rel="stylesheet">
+
+    <link rel="stylesheet" href="MANV-style.css">
+    <script src="MANV-script.js"></script>
+
+</head>
+
+
+<body onload="renderDataOutput()">
+
+    <div id="overlay" class="overlay d-none">
+        <div class="info-triage-color" id="info-triage-color">mit ....... Farbe kennzeichnen</div>
+        <button onclick="hideAndResetOverlay()" class="next-triage-button">weiter mit nächster Sichtung!</button>
+    </div>
+
+    
+    <h1>MANV Sichtung nach CESIRA</h1>
+    <div class="container-patient-survey">
+        <div class="patient-data">
+            <h3>laufende Nummer</h3>
+            <p id="patient-number" class="ongoing-number">1</p>
         </div>
-        <script src="cordova.js"></script>
-        <script src="js/index.js"></script>
-    </body>
+
+        <div class="patient-data">
+            <h3>Name Patient</h3>
+            <input type="text" name="" id="patient-name" placeholder="Name (wenn möglich)">
+        </div>
+
+
+        <table class="CESIRA-check">
+            <tr>
+                <td><input type="checkbox" name="walkable" id="walkable"></td>
+                <td><label for="walkable">kann eigenständig gehen?</label></td>
+            </tr>
+            <tr>
+                <td><input type="checkbox" name="unconscious" id="unconscious"></td>
+                <td><label for="unconscious">bewusstlos?</label></td>
+            </tr>
+            <tr>
+                <td><input type="checkbox" name="bleeding" id="bleeding"></td>
+                <td><label for="bleeding">starke Blutung?</label></td>
+            </tr>
+            <tr>
+                <td><input type="checkbox" name="shock" id="shock"></td>
+                <td><label for="shock">Schock?</label></td>
+            </tr>
+            <tr>
+                <td><input type="checkbox" name="breathing" id="breathing"></td>
+                <td><label for="breathing">starke Atemnot?</label></td>
+            </tr>
+            <tr>
+                <td><input type="checkbox" name="fractures" id="fractures"></td>
+                <td><label for="fractures">Knochenbrüche?</label></td>
+            </tr>
+            <tr>
+                <td><input type="checkbox" name="other" id="other"></td>
+                <td><label for="other">Anderes? (Vergiftung, Erfrierung, Verbrennung, Verletzungen)</label></td>
+            </tr>
+            <tr>
+                <td><input type="checkbox" name="other" id="save-dead-signs"></td>
+                <td><label for="save-dead-signs">nicht mit Leben vereinbare Verletzungen?</label></td>
+            </tr>
+
+        </table>
+        <button onclick="addPatient()" class="add-button">Patient hinzufügen</button>
+    </div>
+
+    <div class="container-count-patients">
+        <h2>Summe</h2>
+        <table class="CESIRA-sum-total">
+            <tr class="bg-grey">
+                <th>Kategorie</th>
+                <th>Anzahl</th>
+            </tr>
+            <tr class="bg-red">
+                <td>Rot</td>
+                <td id="quantity-red">0</td>
+            </tr>
+            <tr class="bg-yellow">
+                <td>Gelb</td>
+                <td id="quantity-yellow">0</td>
+            </tr>
+            <tr class="bg-green">
+                <td>Grün</td>
+                <td id="quantity-green">0</td>
+            </tr>
+            <tr class="bg-black">
+                <td>Schwarz</td>
+                <td id="quantity-black">0</td>
+            </tr>
+            <tr class="bg-white">
+                <td>Weiß</td>
+                <td id="quantity-white">0</td>
+            </tr>
+        </table>
+    </div>
+
+    <div class="container-patient-list">
+        <h2>Liste Patienten</h2>
+        <ul id="patient-list" class="patient-list">
+            
+        </ul>
+        <button onclick="deleteCompleteStorage()">alle Patienten löschen (kann nicht rückgängig gemacht werden)</button>
+    </div>
+
+</body>
+
 </html>
